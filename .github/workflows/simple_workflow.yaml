@@ -1,0 +1,9 @@
+name : Simple Workflow
+on:
+    push
+jobs:
+    simple-job:
+        runs-on : ubuntu-latest
+        steps:
+            - name: Baby Step
+              run: echo "Hello Github Actions"
