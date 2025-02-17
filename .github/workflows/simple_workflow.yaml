@@ -45,8 +45,8 @@ jobs:
 
             - name: Show Artifacts
               run: |
-                  - ls -al
-                  - cat build_log.txt
+                   ls -al
+                   cat build_log.txt
 
             - name: Show output varaibles
               run: echo "${{needs.simple-job.outputs.output_val}}"
