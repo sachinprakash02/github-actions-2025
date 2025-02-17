@@ -6,6 +6,8 @@ on:
 jobs:
     simple-job:
         runs-on : ubuntu-latest
+        outputs:
+            output_val : ${{steps.step5.output.some_var}}
         steps:
             - name: Baby Step
               run: echo "Hello Github Actions"
@@ -22,10 +24,35 @@ jobs:
             - name: Build
               run: python app.py
 
-            - name: Get artifact
+            - name: Upload artifact
               uses: actions/upload-artifact@v4.6.0
               with:
                   name: build_files
                   path: ./build_log.txt
+
+            - name: Create a output variable
+              id: step5
+              run: echo 'some_var=some_value' >> $GITHUB_OUTPUT
+
+    next-job:
+        runs-on: ubuntu-latest
+        needs: simple-job
+        steps:
+            - name: Download Artifacts
+              uses: actions/download-artifact@v4.1.8
+              with:
+                  name: build_files
+
+            - name: Show Artifacts
+              run: |
+                  - ls -al
+                  - cat build_log.txt
+
+            - name: Show output varaibles
+              run: echo "${{needs.simple-job.outputs.output_val}}"
+
+
+
+                  
                       
               
