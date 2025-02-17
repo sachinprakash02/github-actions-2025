@@ -7,3 +7,16 @@ jobs:
         steps:
             - name: Baby Step
               run: echo "Hello Github Actions"
+
+            - name: Checkout
+              uses: actions/checkout@v4.2.2
+
+            - name: Directory Content
+              run: ls -al
+
+            - name: Run Test
+              run: python test.py
+
+            - name: Deploy
+              run: python app.py
+              
