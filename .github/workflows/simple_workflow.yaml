@@ -1,6 +1,8 @@
 name : Simple Workflow
 on:
-    push
+    push:
+    pull_request:
+        types: [opened]
 jobs:
     simple-job:
         runs-on : ubuntu-latest
@@ -17,6 +19,13 @@ jobs:
             - name: Run Test
               run: python test.py
 
-            - name: Deploy
+            - name: Build
               run: python app.py
+
+            - name: Get artifact
+              uses: actions/upload-artifact@v4.6.0
+              with:
+                  name: build_files
+                  path: ./build_log.txt
+                      
               
