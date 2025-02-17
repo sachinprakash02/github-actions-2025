@@ -49,7 +49,7 @@ jobs:
                    cat build_log.txt
 
             - name: Show output varaibles
-              run: echo "${{needs.simple-job.outputs.output_val}}"
+              run: echo "${{needs.simple-job.output.output_val}}"
 
 
 
