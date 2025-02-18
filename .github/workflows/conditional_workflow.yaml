@@ -26,6 +26,7 @@ jobs:
 
    conditional-jobs-on-failure:
      runs-on: ubuntu-latest
+     needs: conditional-jobs
      if: failure()
      steps:
        -  name: PWD
