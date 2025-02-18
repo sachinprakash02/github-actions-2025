@@ -10,19 +10,11 @@ jobs:
 
        - name: Check and run on faliure
          if: failure()
-         run: echo "last job failed"
+         run: echo "last step failed"
 
        -  name: PWD
           run: pwd
 
-       - name: Check and run on suceess
-         if: success()
-         id: step4
-         run: echo "last job sucess"
-         
-       - name: Evaluate outcome
-         if: steps.step4.outcome == 'success'
-         run: echo "step4 pass"
 
    conditional-jobs-on-failure:
      runs-on: ubuntu-latest
@@ -40,4 +32,13 @@ jobs:
        - name: Evaluate outcome
          if: steps.step4.outcome == 'success'
          run: echo "step4 pass"
+         
+       - name: Create error
+         continue-on-error: true
+         id: step6
+         run: createERROR
+         
+       - name: Check and run
+         run: echo {{steps.step6.outcome}}
+        
      
