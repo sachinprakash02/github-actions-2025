@@ -11,7 +11,7 @@ jobs:
          run: ls -al
 
        - name: Call Child Job
-         uses: ./.github/workflows/child_workflow.yaml
+         uses: ./.github/workflows/child_wf.yaml
          id: runChild
          with:
             logFileName: "hello_child.txt"
