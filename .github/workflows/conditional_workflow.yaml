@@ -23,4 +23,20 @@ jobs:
        - name: Evaluate outcome
          if: steps.step4.outcome == 'success'
          run: echo "step4 pass"
+
+   conditional-jobs-on-failure:
+     runs-on: ubuntu-latest
+     if: failure()
+     steps:
+       -  name: PWD
+          run: pwd
+
+       - name: Check and run on suceess
+         if: success()
+         id: step4
+         run: echo "last job sucess"
+         
+       - name: Evaluate outcome
+         if: steps.step4.outcome == 'success'
+         run: echo "step4 pass"
      
