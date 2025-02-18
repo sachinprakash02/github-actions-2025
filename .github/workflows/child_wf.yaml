@@ -9,6 +9,7 @@ on:
               default: log.txt
       outputs:
           logContent:
+              description: "Captured log content"
               value: ${{jobs.childJob.outputs.steplogContent}}
 
 
@@ -22,7 +23,7 @@ jobs:
           run: pwd
           
        - name: Read Log file
-         run: echo "Found Input File: ${{inputs.logFileName}}"
+         run: echo "Found Input File: ${{ inputs.logFileName }}"
 
        - name: Set output
          id: step2
