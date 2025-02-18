@@ -9,6 +9,18 @@ jobs:
          run: hebba
 
        - name: Check and run on faliure
-         if: faliure()
+         if: failure()
          run: echo "last job failed"
+
+       -  name: PWD
+          run: pwd
+
+       - name: Check and run on suceess
+         if: success()
+         id: step4
+         run: echo "last job sucess"
+         
+       - name: Evaluate outcome
+         if: steps.step4.outcome == 'success'
+         run: echo "step4 pass"
      
