@@ -1,0 +1,29 @@
+name: Child Workflow
+on: 
+  workflow_call:
+      inputs:
+          logFileName:
+              type: string
+              description: some description
+              required: false
+              default: log.txt
+      outputs:
+          logContent:
+              value: ${{jobs.childJob.outputs.steplogContent}}
+
+
+jobs:
+   childJob:
+     runs-on: ubuntu-latest
+     outputs:
+        steplogContent : ${{steps.step2.outputs.version}}
+     steps:
+       -  name: PWD
+          run: pwd
+          
+       - name: Read Log file
+         run: echo "Found Input File: ${{inputs.logFileName}}"
+
+       - name: Set output
+         id: step2
+         run: echo "version=1.2.1" >> $GITHUB_OUTPUT
