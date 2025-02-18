@@ -39,6 +39,6 @@ jobs:
          run: createERROR
          
        - name: Check and run
-         run: echo {{steps.step6.outcome}}
+         run: echo "${{steps.step6.outcome}}"
         
      
