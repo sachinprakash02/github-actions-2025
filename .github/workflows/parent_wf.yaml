@@ -2,19 +2,14 @@ name: Parent Workflow
 on: push
 
 jobs:
-   parentJob:
-     runs-on: ubuntu-latest
-     outputs: 
-      logContent: ${{ needs.childJob.outputs.logContent }}
-     steps:
-       - name: List file
-         run: ls -al
+  childJob: 
+    uses: sachinprakash02/github-actions-2025/.github/workflows/child_workflow.yaml@main  
+    with:
+      logFileName: "hello_child.txt"
 
-       - name: Call Child Job
-         uses: sachinprakash02/github-actions-2025/github/workflows/child_wf.yaml@main
-         id: runChild
-         with:
-            logFileName: "hello_child.txt"
-            
-       - name: Read output of child job
-         run: echo "Child ${{ needs.childJob.outputs.steplogContent }}"
+  parentJob:
+    runs-on: ubuntu-latest
+    needs: childJob  
+    steps:
+      - name: Read output of child job
+        run: echo "Child Output ${{ needs.childJob.outputs.logContent }}" 
