@@ -1,15 +1,14 @@
-- name: Conditional Workflow
-  on:
-    push:
+name: Conditional Workflow
+on: push
 
-  jobs:
-     conditional-jobs:
-       runs-on: ubuntu-latest
-       steps:
-         - name: Create Error Type
-           run: hebba
-  
-         - name: Check and run on faliure
-           if: faliure()
-           run: echo "last job failed"
+jobs:
+   conditional-jobs:
+     runs-on: ubuntu-latest
+     steps:
+       - name: Create Error Type
+         run: hebba
+
+       - name: Check and run on faliure
+         if: faliure()
+         run: echo "last job failed"
      
