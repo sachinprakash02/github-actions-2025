@@ -10,8 +10,9 @@ jobs:
 
        - name: Call Child Job
          uses: ./.github/workflows/child_workflow.yaml
+         id: runChild
          with:
             logFileName: "hello_child.txt"
             
        - name: Read output of child job
-         run: echo "Child Output: ${{outputs.logContent}}"
+         run: echo "Child Output: ${{ needs.childJob.outputs.steplogContent }}"
