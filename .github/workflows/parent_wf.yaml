@@ -3,7 +3,7 @@ on: push
 
 jobs:
   childJob: 
-    uses: sachinprakash02/github-actions-2025/.github/workflows/child_workflow.yaml@main  
+    uses: ./.github/workflows/child_workflow.yaml
     with:
       logFileName: "hello_child.txt"
 
