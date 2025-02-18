@@ -1,0 +1,17 @@
+name: Parent Workflow
+on: push
+
+jobs:
+   parentJob:
+     runs-on: ubuntu-latest
+     steps:
+       - name: List file
+         run: ls -al
+
+       - name: Call Child Job
+         uses: ./.github/workflows/child_workflow.yaml
+         with:
+            logFileName: "hello_child.txt"
+            
+       - name: Read output of child job
+         run: echo "Child Output: ${{outputs.logContent}}"
