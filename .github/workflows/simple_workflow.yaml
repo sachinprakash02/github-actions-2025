@@ -69,7 +69,7 @@ jobs:
               run: echo "HOST_IP=10.88.99.11" >> $GITHUB_ENV
 
             - name: Show github env
-              run: echo "$GITHIB_ENV"
+              run: echo "$GITHUB_ENV"
 
 
                   
