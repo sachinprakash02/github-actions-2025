@@ -23,7 +23,7 @@ jobs:
           run: pwd
           
        - name: Read Log file
-         run: echo "Found Input File: ${{ inputs.logFileName }}"
+         run: echo "Found Input File ${{ inputs.logFileName }}"
 
        - name: Set output
          id: step2
