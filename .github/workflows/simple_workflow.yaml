@@ -62,6 +62,15 @@ jobs:
             - name: Show Environmet Variable
               run: echo "${{env.VERSION}}"
 
+            - name: Show github refs
+              run: echo "$GITHUB_REF"
+
+            - name: Add value to a GITHUB_ENV
+              run: echo "HOST_IP=10.88.99.11" >> $GITHUB_ENV
+
+            - name: Show github env
+              run: echo "$GITHIB_ENV"
+
 
                   
                       
