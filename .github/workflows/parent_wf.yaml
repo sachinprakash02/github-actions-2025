@@ -4,6 +4,8 @@ on: push
 jobs:
    parentJob:
      runs-on: ubuntu-latest
+     outputs: 
+      logContent: ${{ needs.childJob.outputs.logContent }}
      steps:
        - name: List file
          run: ls -al
@@ -15,4 +17,4 @@ jobs:
             logFileName: "hello_child.txt"
             
        - name: Read output of child job
-         run: echo "Child Output: ${{ needs.childJob.outputs.steplogContent }}"
+         run: echo "Child ${{ needs.childJob.outputs.steplogContent }}"
