@@ -12,7 +12,7 @@ jobs:
             - name: See Env ls
               run: |
                   pwd
-                  ls - al
+                  ls -al
                   
             - name: Code Checkout
               uses: actions/Checkout@v4
