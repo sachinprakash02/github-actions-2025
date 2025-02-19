@@ -9,6 +9,8 @@ jobs:
             env: 
                 APP_USER: 'sachin'
         steps:
+            - name: See Env
+              run: echo "User is ${{env.APP_USER}}"
             - name: Code Checkout
               uses: actions/Checkout@v4
               
