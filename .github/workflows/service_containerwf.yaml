@@ -1,0 +1,44 @@
+name: Test with PostgreSQL
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:  # ✅ Service Container Name
+        image: postgres:latest  # ✅ Pulls the latest PostgreSQL Docker image
+        env:  # ✅ Sets environment variables for the database
+          POSTGRES_USER: myuser
+          POSTGRES_PASSWORD: mypassword
+          POSTGRES_DB: mydatabase
+        ports:
+          - 5432:5432  # ✅ Maps container port to the runner
+        options: >  # ✅ Extra options (increase shared memory for performance)
+          --health-cmd "pg_isready -U myuser"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install PostgreSQL Client
+        run: sudo apt-get install -y postgresql-client
+
+      - name: Wait for PostgreSQL
+        run: |
+          for i in {1..10}; do
+            pg_isready -h localhost -U myuser -d mydatabase && break
+            echo "Waiting for PostgreSQL..."
+            sleep 5
+          done
+
+      - name: Run Tests
+        env:
+          DATABASE_URL: postgresql://myuser:mypassword@localhost:5432/mydatabase  # ✅ Connection String
+        run: |
+          echo "Running tests..."
+          python3 -c "import psycopg2; conn = psycopg2.connect('${DATABASE_URL}'); print('Connected to DB')"
