@@ -1,0 +1,28 @@
+name: Using Inputs
+on: 
+    workflow_dispatch:
+        inputs:
+            logLevel:
+                description: 'Log Level'
+                required: true
+                default: 'warning'
+                type: choice
+                options:
+                    - info
+                    - warning
+            print_tags:
+                description: 'STDOUT Value'
+                required: true
+                type: boolean
+            tags:
+                description: 'String to print'
+                required: true
+                type: string
+
+jobs:
+    print-tag:
+        runs-on: ubuntu-latest
+        if:  ${{ inputs.print_tags }} 
+        steps:
+            - name: Print the input tag to STDOUT
+              run: echo  The tags are ${{ inputs.tags }}
