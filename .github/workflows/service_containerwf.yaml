@@ -34,6 +34,9 @@ jobs:
             sleep 5
           done
 
+      - name: add requirement
+        run: pip install psycopg2
+
       - name: Run Tests
         env:
           DATABASE_URL: postgresql://myuser:mypassword@localhost:5432/mydatabase  # ✅ Connection String
