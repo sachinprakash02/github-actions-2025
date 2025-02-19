@@ -9,8 +9,11 @@ jobs:
             env: 
                 APP_USER: 'sachin'
         steps:
-            - name: See Env
-              run: echo "User is ${{APP_USER}}"
+            - name: See Env ls
+              run: |
+                  pwd
+                  ls - al
+                  
             - name: Code Checkout
               uses: actions/Checkout@v4
               
