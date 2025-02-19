@@ -17,9 +17,7 @@ jobs:
           - 5432:5432  # ✅ Maps container port to the runner
         options: >  # ✅ Extra options (increase shared memory for performance)
           --health-cmd "pg_isready -U myuser"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+
 
     steps:
       - name: Checkout Code
