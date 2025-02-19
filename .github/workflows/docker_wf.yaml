@@ -1,0 +1,19 @@
+name: DockerBased Workflow
+on: push
+
+jobs:
+    dockerJob:
+        runs-on: ubuntu-latest
+        container:
+            image: python:3.10-slim
+            env: 
+                APP_USER: 'sachin'
+        steps:
+            - name: Code Checkout
+              uses: actions/Checkout@v4
+              
+            - name: Check Directory
+              run: ls -al
+              
+            - name: Run app.py
+              run: python app.py
